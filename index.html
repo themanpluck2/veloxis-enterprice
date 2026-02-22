@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veloxis Enterprises | Automation Agency</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary-dark: #0a0410;
+            --purple-bg: #150924;
+            --purple-card: #1f0d36;
+            --purple-accent: #8b5cf6;
+            --text-main: #ffffff;
+            --text-muted: #a78bfa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(10, 4, 16, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--purple-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Section 1: Landing Page */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(rgba(10, 4, 16, 0.8), rgba(21, 9, 36, 0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop') no-repeat center center/cover;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: #d1d5db;
+        }
+
+        /* Section 2: Services / Automation Details */
+        .services-section {
+            background-color: var(--purple-bg);
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--purple-accent);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--primary-dark);
+            border: 1px solid #3c1e70;
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--purple-accent);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--purple-accent);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #9ca3af;
+        }
+
+        /* Section 3: Message Form (Discord Webhook) */
+        .message-section {
+            padding: 80px 5%;
+            background-color: var(--primary-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-container {
+            background-color: var(--purple-card);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #3c1e70;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #3c1e70;
+            background-color: var(--primary-dark);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: var(--purple-accent);
+        }
+
+        .submit-btn {
+            background-color: var(--purple-accent);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #7c3aed;
+        }
+
+        .submit-btn:disabled {
+            background-color: #5b21b6;
+            cursor: not-allowed;
+        }
+
+        .status-msg {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Section 4: Contact & Stats */
+        .contact-section {
+            padding: 80px 5%;
+            background-color: var(--purple-bg);
+            text-align: center;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background-color: var(--primary-dark);
+            border: 1px solid #3c1e70;
+            padding: 40px;
+            border-radius: 12px;
+            min-width: 250px;
+        }
+
+        .stat-box h2 {
+            font-size: 2.5rem;
+            color: var(--purple-accent);
+        }
+
+        .stat-box .stars {
+            color: #fbbf24;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .email-btn {
+            display: inline-block;
+            background-color: var(--purple-accent);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .email-btn:hover {
+            background-color: #7c3aed;
+        }
+
+        .social-links {
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            color: var(--purple-accent);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Veloxis Enterprises</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#message-us">Message Us</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1>Welcome to Veloxis Enterprises</h1>
+        <p>Your partner in intelligent automation. We streamline your business processes so you can focus on growth.</p>
+    </section>
+
+    <section id="services" class="services-section">
+        <h2 class="section-title">The Kind of Automation We Do</h2>
+        
+        <div class="grid-container">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Seamless Integration</h3>
+                <p>Connect all your existing tools and platforms into unified, intelligent workflows that work together effortlessly.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔗</div>
+                <h3>n8n Workflow Automation</h3>
+                <p>Build custom workflows that connect your tools and automate repetitive tasks, saving time and reducing human error.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3>AI-Powered Solutions</h3>
+                <p>Integrate AI models to enhance decision-making, automate customer interactions, and unlock new insights.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="message-us" class="message-section">
+        <h2 class="section-title">Drop Us A Message</h2>
+        <p style="margin-bottom: 30px; color: #a78bfa; text-align: center;">Let us know where to reach you, and we'll get right back to you.</p>
+        
+        <div class="form-container">
+            <form id="webhook-form">
+                <div class="form-group">
+                    <label for="platform">Platform (e.g., Discord, Instagram, X)</label>
+                    <input type="text" id="platform" placeholder="Where should we message you?" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Your Username</label>
+                    <input type="text" id="username" placeholder="Your handle/username on that platform" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Question or Message</label>
+                    <textarea id="message" rows="5" placeholder="How can we help automate your business?" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submit-btn">Send Message</button>
+                <div id="form-status" class="status-msg"></div>
+            </form>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="stats-container">
+            <div class="stat-box">
+                <h2>900+</h2>
+                <p>Clients we have worked with</p>
+            </div>
+            <div class="stat-box">
+                <h2>4.8 / 5</h2>
+                <div class="stars">★★★★★</div>
+                <p>Average Client Rating</p>
+            </div>
+        </div>
+
+        <a href="mailto:veloxisenterprice@gmail.com" class="email-btn">Email Us</a>
+
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Read our Ratings</a>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('webhook-form').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Prevent page reload
+            
+            const platform = document.getElementById('platform').value;
+            const username = document.getElementById('username').value;
+            const message = document.getElementById('message').value;
+            const statusDiv = document.getElementById('form-status');
+            const submitBtn = document.getElementById('submit-btn');
+
+            // The Discord Webhook URL you provided
+            const webhookUrl = "https://discord.com/api/webhooks/1473233769178726451/2Xu8WAvQJiFt1LOnxrXwDrRXWYCZTMtrzLzUWIn0LEQiQTEqQ27KzMR7youyEvXuKlD5";
+
+            // Formatting the message for Discord
+            const payload = {
+                content: `**🔔 New Inquiry from Website**\n**Platform:** ${platform}\n**Username:** ${username}\n**Message:**\n>>> ${message}`
+            };
+
+            try {
+                // Update button state while sending
+                submitBtn.textContent = "Sending...";
+                submitBtn.disabled = true;
+                statusDiv.textContent = "";
+
+                // Send the POST request to Discord
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                // Check if successful (Discord usually returns 204 No Content for successful webhook posts)
+                if (response.ok) {
+                    statusDiv.textContent = "Message sent! We will reach out to you shortly.";
+                    statusDiv.style.color = "#10b981"; // Success green
+                    document.getElementById('webhook-form').reset(); // Clear the form
+                } else {
+                    statusDiv.textContent = "Oops! Something went wrong. Please try emailing us directly.";
+                    statusDiv.style.color = "#ef4444"; // Error red
+                }
+            } catch (error) {
+                statusDiv.textContent = "Error: Could not connect to the server. Please try again later.";
+                statusDiv.style.color = "#ef4444";
+            } finally {
+                // Reset button state
+                submitBtn.textContent = "Send Message";
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+</html>
