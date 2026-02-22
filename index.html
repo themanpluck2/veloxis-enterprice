@@ -34,18 +34,31 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background-color: rgba(10, 4, 16, 0.9);
+            padding: 15px 5%;
+            background-color: rgba(10, 4, 16, 0.95);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--purple-accent);
+        /* Updated Logo Styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-container:hover {
+            opacity: 0.8;
+        }
+
+        .logo-img {
+            height: 50px; /* Adjust this to make the logo bigger or smaller */
+            width: auto;
+            border-radius: 4px; /* Slightly rounds the corners if the image has a background */
         }
 
         .nav-links {
@@ -57,6 +70,11 @@
             color: var(--text-main);
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-accent);
         }
 
         /* Section 1: Landing Page */
@@ -68,13 +86,14 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            background: linear-gradient(rgba(10, 4, 16, 0.8), rgba(21, 9, 36, 0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop') no-repeat center center/cover;
+            background: linear-gradient(rgba(10, 4, 16, 0.85), rgba(21, 9, 36, 0.95)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop') no-repeat center center/cover;
             margin-top: 60px;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
+            color: var(--text-main);
         }
 
         .hero p {
@@ -109,7 +128,7 @@
             border: 1px solid #3c1e70;
             border-radius: 12px;
             padding: 30px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .card:hover {
@@ -118,7 +137,7 @@
         }
 
         .card-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--purple-accent);
             margin-bottom: 20px;
         }
@@ -172,6 +191,7 @@
             color: white;
             font-size: 1rem;
             outline: none;
+            transition: border-color 0.3s;
         }
 
         .form-group input:focus, 
@@ -228,16 +248,22 @@
             padding: 40px;
             border-radius: 12px;
             min-width: 250px;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--purple-accent);
         }
 
         .stat-box h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--purple-accent);
         }
 
         .stat-box .stars {
             color: #fbbf24;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-top: 10px;
         }
 
@@ -250,11 +276,12 @@
             text-decoration: none;
             border-radius: 30px;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .email-btn:hover {
             background-color: #7c3aed;
+            transform: scale(1.05);
         }
 
         .social-links {
@@ -266,17 +293,29 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 1.1rem;
+            transition: color 0.3s;
         }
 
         .social-links a:hover {
             color: var(--purple-accent);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #050208;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6b7280;
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Veloxis Enterprises</div>
+        <a href="#home" class="logo-container">
+            <img src="logo.png" alt="Veloxis Enterprises Logo" class="logo-img">
+        </a>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#services">Services</a>
@@ -358,10 +397,14 @@
             <a href="#">Read our Ratings</a>
         </div>
     </section>
+    
+    <footer>
+        &copy; 2026 Veloxis Enterprises. All rights reserved.
+    </footer>
 
     <script>
         document.getElementById('webhook-form').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Prevent page reload
+            e.preventDefault(); 
             
             const platform = document.getElementById('platform').value;
             const username = document.getElementById('username').value;
@@ -369,21 +412,17 @@
             const statusDiv = document.getElementById('form-status');
             const submitBtn = document.getElementById('submit-btn');
 
-            // The Discord Webhook URL you provided
             const webhookUrl = "https://discord.com/api/webhooks/1473233769178726451/2Xu8WAvQJiFt1LOnxrXwDrRXWYCZTMtrzLzUWIn0LEQiQTEqQ27KzMR7youyEvXuKlD5";
 
-            // Formatting the message for Discord
             const payload = {
                 content: `**🔔 New Inquiry from Website**\n**Platform:** ${platform}\n**Username:** ${username}\n**Message:**\n>>> ${message}`
             };
 
             try {
-                // Update button state while sending
                 submitBtn.textContent = "Sending...";
                 submitBtn.disabled = true;
                 statusDiv.textContent = "";
 
-                // Send the POST request to Discord
                 const response = await fetch(webhookUrl, {
                     method: 'POST',
                     headers: {
@@ -392,20 +431,18 @@
                     body: JSON.stringify(payload)
                 });
 
-                // Check if successful (Discord usually returns 204 No Content for successful webhook posts)
                 if (response.ok) {
                     statusDiv.textContent = "Message sent! We will reach out to you shortly.";
-                    statusDiv.style.color = "#10b981"; // Success green
-                    document.getElementById('webhook-form').reset(); // Clear the form
+                    statusDiv.style.color = "#10b981"; 
+                    document.getElementById('webhook-form').reset(); 
                 } else {
                     statusDiv.textContent = "Oops! Something went wrong. Please try emailing us directly.";
-                    statusDiv.style.color = "#ef4444"; // Error red
+                    statusDiv.style.color = "#ef4444"; 
                 }
             } catch (error) {
                 statusDiv.textContent = "Error: Could not connect to the server. Please try again later.";
                 statusDiv.style.color = "#ef4444";
             } finally {
-                // Reset button state
                 submitBtn.textContent = "Send Message";
                 submitBtn.disabled = false;
             }
