@@ -34,7 +34,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
+            padding: 10px 5%; /* Reduced padding slightly to accommodate bigger logo */
             background-color: rgba(10, 4, 16, 0.95);
             position: fixed;
             width: 100%;
@@ -56,9 +56,10 @@
         }
 
         .logo-img {
-            height: 50px; /* Adjust this to make the logo bigger or smaller */
+            /* CHANGED HEIGHT HERE from 50px to 70px */
+            height: 70px; 
             width: auto;
-            border-radius: 4px; /* Slightly rounds the corners if the image has a background */
+            border-radius: 4px; 
         }
 
         .nav-links {
@@ -87,7 +88,8 @@
             text-align: center;
             padding: 0 20px;
             background: linear-gradient(rgba(10, 4, 16, 0.85), rgba(21, 9, 36, 0.95)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop') no-repeat center center/cover;
-            margin-top: 60px;
+            /* Increased margin-top to account for slightly taller navbar */
+            margin-top: 80px; 
         }
 
         .hero h1 {
@@ -314,7 +316,7 @@
 
     <nav>
         <a href="#home" class="logo-container">
-            <img src="logo.png" alt="Veloxis Enterprises Logo" class="logo-img">
+            <img src="logo.jpg" alt="Veloxis Enterprises Logo" class="logo-img">
         </a>
         <div class="nav-links">
             <a href="#home">Home</a>
